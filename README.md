@@ -158,3 +158,13 @@ Xem [`rubric.md`](rubric.md) (100 lõi + 20 bonus) và
 public** vào ô LMS Ngày 17 — không PR. Mới với workflow lập trình cùng AI? Đọc
 [`VIBE-CODING.md`](VIBE-CODING.md) trước. Bonus là một **phiên brainstorm mở** về
 bài toán thực tế — xem [`BONUS-CHALLENGE.md`](BONUS-CHALLENGE.md).
+
+Artifact đã chuẩn bị cho submission:
+
+- [`submission/RUN_LOG.md`](submission/RUN_LOG.md): output đã chạy của `make verify`,
+  `make test`, `make flywheel`, và `dbt build`.
+- [`submission/REFLECTION.md`](submission/REFLECTION.md): reflection ngắn theo prompt.
+- [`datasets/eval_golden.jsonl`](datasets/eval_golden.jsonl) và
+  [`datasets/preference_pairs.jsonl`](datasets/preference_pairs.jsonl): artifact sinh từ
+  `make flywheel`.
+- [`bonus/DESIGN.md`](bonus/DESIGN.md): bài brainstorm optional cho phần +20 bonus.

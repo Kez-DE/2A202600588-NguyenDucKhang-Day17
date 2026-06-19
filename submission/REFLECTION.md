@@ -1,22 +1,9 @@
-# Reflection — Day 17 (≤ 200 words)
+# Reflection — Day 17
 
-Answer briefly, in your own words. This is graded on reasoning, not length.
+1. The easiest silent failure is the `traces → Bronze` flattening step. If child spans lose `trace_id`, `parent_id`, status, or token fields, the pipeline still runs but later summaries become wrong. I would detect it with row-count checks per trace, span-tree depth checks, and alerts when successful/error outcomes suddenly disappear.
 
-1. **The flywheel.** Day 13 emitted agent traces; today you turned them into an
-   eval set and DPO pairs that Day 22 will train on. Which step in
-   `traces → Bronze → datasets` would break most silently in production if you
-   got it wrong — and how would you detect it?
+2. If decontamination is skipped, the model trains on prompts that also appear in the eval set. Offline metrics then look better than reality because the model has already seen the question-answer pattern. The lie would show up as high eval scores but weaker performance on fresh user prompts.
 
-2. **Decontamination.** Your run dropped 2 of 3 preference pairs because their
-   prompts were in the eval set. What concretely goes wrong if you *skip* this
-   step and train on those pairs? How would the lie show up in your metrics?
+3. A dangerous feature is `lifetime_spend` for fraud or credit scoring. If training joins the latest value instead of the value known at the transaction time, the model sees future purchases and learns from information unavailable during serving.
 
-3. **Point-in-time.** The naive join leaked a future `lifetime_spend` into the
-   training row. Describe one feature in a system you know that would be
-   dangerous to join without an `ASOF`/point-in-time guard.
-
-4. **Graph vs vector.** From `kg_demo.py`, name one question the knowledge graph
-   answers well that flat chunk retrieval (`embed.py`) would struggle with, and
-   one where the graph is overkill.
-
-_Write your answers below._
+4. The knowledge graph handles the multi-hop question `widget -> accessory -> Hanoi fulfillment center` well because it can traverse relationships across facts. Flat vector retrieval is enough for simple lookup questions like `what is the gadget warranty?`; a graph would be overkill there.
